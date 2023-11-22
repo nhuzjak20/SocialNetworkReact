@@ -1,9 +1,9 @@
 import React from 'react'
-import '../App.css'
+import '../../App.css'
 import {Col, Row} from 'antd'
-import PostInputForm from './PostInputForm'
+import PostInputForm from '../Components/PostInputForm'
 
-function PostsPage() {
+function PostsPage({username}) {
   return (
     <>
       <div>
@@ -11,7 +11,7 @@ function PostsPage() {
           <Col span={12} style={{display: 'flex', flexDirection: 'column'}}> 
             <Row>
               <Col span={24}>
-                <PostInputForm></PostInputForm>
+                <PostInputForm username={username}></PostInputForm>
               </Col>
             </Row>
             <Row>

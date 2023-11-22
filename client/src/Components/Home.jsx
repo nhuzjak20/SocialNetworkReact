@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
-import Navbar from './Navbar'
-import PostsPage from './PostsPage'
-import MessagesPage from './MessagesPage'
-import OtherPage from './OtherPage'
+import React, { useState, useTransition } from 'react'
+import Navbar from './Components/Navbar'
+import PostsPage from './MainPages/PostsPage'
+import MessagesPage from './MainPages/MessagesPage'
+import OtherPage from './MainPages/OtherPage'
+
 
 function Home({username}) {
   const [CurrentWindow, UpdateCurrentWindow] = useState(0)
+  
   function changeWindow(num){
+    
     UpdateCurrentWindow(num)
   }
   return (
     <div>
       <Navbar SelectedPanel={changeWindow} username={username}></Navbar>
       <hr style={{padding: 0, margin: 0}}/>
+      
       {
-        CurrentWindow == 0 ? <PostsPage></PostsPage> : (CurrentWindow == 1 ? <MessagesPage></MessagesPage> : <OtherPage></OtherPage>)
+        CurrentWindow === 0 ? <PostsPage username={username}></PostsPage> : (CurrentWindow === 1 ? <MessagesPage></MessagesPage> : <OtherPage></OtherPage>)
       }
       
     </div>

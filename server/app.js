@@ -4,6 +4,8 @@ const cors = require('cors');
 var cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const sqlite3 = require('sqlite3').verbose();
+let db = new sqlite3.Database('./baza.db',()=>console.log('baza radi'));
 
 
 app.use(cookieParser())
@@ -23,6 +25,36 @@ app.get('/', (req, res) => {
 
 app.post('/loginApi', urlencodedParser ,(req, res)=>{
     res.end()
+})
+
+app.get('/kreirajBaze', (req, res)=>{
+    db.all('CREATE TABLE Objave ( NaslovObjave TEXT, KategorijaObjave TEXT, Tekst TEXT, NazivKorisnika TEXT, DatumObjave DATE);')
+    db.all('CREATE TABLE Korisnici (username TEXT,password TEXT,AuthNum INTEGER);')
+    res.send('Baza je kreirana')
+})
+
+app.get('/PrikaziBazu', (req, res) => {
+    var redovi = []
+    db.all('Select * from Objave', [],(err, rows)=>{
+        rows.forEach(row =>{
+        console.log(row)    
+        redovi.push(row)})
+    })
+    console.log(redovi.toString())
+    res.send(redovi.toString())
+})
+
+app.post('/sendPost', urlencodedParser ,(req, res)=>{
+    const datum = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+    //console.log(req.body.naslov, req.body.kategorija , Date.parse(Date.now()), req.body.text,req.body.username)
+    db.all('insert into Objave(NaslovObjave, KategorijaObjave, Tekst, NazivKorisnika , DatumObjave) values(?,?,?,?,?)',[req.body.naslov, req.body.kategorija ,req.body.text , req.body.username, datum], (err, rows)=>{
+        if(err){
+            console.log(err);
+        } else {
+            console.log("Unos radi")
+            res.send("Radi")
+        }
+    })
 })
 
 app.listen(5001, ()=>{
