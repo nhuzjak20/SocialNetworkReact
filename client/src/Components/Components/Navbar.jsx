@@ -2,7 +2,6 @@ import { AlignLeftOutlined } from '@ant-design/icons';
 import React from 'react';
 import { Collapse, theme } from 'antd';
 import NavBarMiddle from './NavBarMiddle';
-const glob = null
 const text = `
   A dog is a type of domesticated animal.
   Known for its loyalty and faithfulness,

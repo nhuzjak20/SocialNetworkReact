@@ -33,15 +33,25 @@ app.get('/kreirajBaze', (req, res)=>{
     res.send('Baza je kreirana')
 })
 
-app.get('/PrikaziBazu', (req, res) => {
+app.get('/PrikaziObjave', (req, res) => {
     var redovi = []
+    console.log("Spojen si")
+    if(req.params.kategorija){
+        db.all('SELECT * FROM Objave WHERE KategorijaObjave = ' + req.params.kategorija,(err,res) => {
+            res.forEach((el)=>{
+                redovi.push(el)
+            })    
+        })
+        res.send(redovi)
+        res.end()
+    }
     db.all('Select * from Objave', [],(err, rows)=>{
         rows.forEach(row =>{
-        console.log(row)    
-        redovi.push(row)})
+        redovi.push(row)
+        })
+        res.send(redovi)
     })
-    console.log(redovi.toString())
-    res.send(redovi.toString())
+   
 })
 
 app.post('/sendPost', urlencodedParser ,(req, res)=>{

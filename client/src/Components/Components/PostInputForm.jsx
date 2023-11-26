@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Input, Col, Row, Select, Button } from 'antd';
+import { TailSpin } from 'react-loader-spinner' 
 const { TextArea } = Input
 
-function PostInputForm({username}) {
+function PostInputForm({username, LoaderChange}) {
   const [naslov, UpdateNaslov] = useState('')
   const [kategorija, UpdateKategorija] = useState('Lucy')
   const [text, UpdateTekst] = useState('')
+  
   function sendPost(){
-    console.log(
-    )
     fetch('http://localhost:5001/sendPost', {method: 'POST', headers: {'content-type': 'application/json'}, body: JSON.stringify({username: username, text: text, kategorija: kategorija, naslov: naslov})})
+    LoaderChange()
   }
   return (
     <div style={{padding: '3%',backgroundColor: 'darkgray', display: 'flex', gap: 10 ,flexDirection: 'column'}}>

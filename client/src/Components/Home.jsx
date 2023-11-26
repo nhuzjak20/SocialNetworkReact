@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from 'react'
+import React, { useState } from 'react'
 import Navbar from './Components/Navbar'
 import PostsPage from './MainPages/PostsPage'
 import MessagesPage from './MainPages/MessagesPage'
@@ -13,7 +13,7 @@ function Home({username}) {
     UpdateCurrentWindow(num)
   }
   return (
-    <div>
+    <div style={{overflow: 'hidden'}}>
       <Navbar SelectedPanel={changeWindow} username={username}></Navbar>
       <hr style={{padding: 0, margin: 0}}/>
       

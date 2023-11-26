@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import PoljeObjekata from '../data'
+
 import { Input, Button } from 'antd';
 
 function LoginPage({logiranKorisnik}) {

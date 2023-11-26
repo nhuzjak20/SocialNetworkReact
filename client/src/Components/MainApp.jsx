@@ -1,4 +1,4 @@
-import React, { useState, useTransition } from 'react'
+import React, { useState } from 'react'
 import LoginPage from './MainPages/LoginPage'
 import Home from './Home'
 import Cookies from 'universal-cookie';
@@ -7,7 +7,7 @@ const cookies = new Cookies();
 
 function MainApp() {
     const [korisnik, updateLogiran] = useState(cookies.get('username') ? 1 : 0)
-    const [isPending, startTransition] = useTransition();
+    
     console.log('kolacici', document.cookies)
     console.log(' Korisnik prijavljem', korisnik)
     
